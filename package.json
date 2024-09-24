@@ -4,12 +4,14 @@
   "description": "Build upon lesson 1 to create a collection in MongoDB and use GET requests to return data from it.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "cse341-L2-personal"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "node --watch --watch-preserve-output server.js"
   },
   "author": "Joel Jensen",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "mongodb": "^6.9.0"
+  }
 }
