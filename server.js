@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
+const envar = require('dotenv').config();
 
 // Response for the site home page
 app.use("/", require("./routes"));                               

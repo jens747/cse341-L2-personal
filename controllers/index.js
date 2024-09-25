@@ -1,5 +1,12 @@
-displayName = (req, res) => {
+const displayMichael = (req, res) => {
   res.send("Michael Scott");
 }
 
-module.exports = { displayName };
+const displayDwight = (req, res) => {
+  res.send("Dwight Schrute");
+}
+
+module.exports = { 
+  displayMichael, 
+  displayDwight
+};
