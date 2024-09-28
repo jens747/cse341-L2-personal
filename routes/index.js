@@ -1,9 +1,16 @@
-const routes = require("express").Router();
-const names = require("../controllers/index");
-const data = require("../connections");
+const router = require("express").Router();
 
-routes.get("/ms", names.displayMichael);
+router.use("/contacts", require("./contacts"));
 
-routes.get("/ds", names.displayDwight);
+module.exports = router;
 
-module.exports = routes;
+
+// const routes = require("express").Router();
+// const names = require("../controllers/index");
+// const data = require("../connections");
+
+// routes.get("/ms", names.displayMichael);
+
+// routes.get("/ds", names.displayDwight);
+
+// module.exports = routes;

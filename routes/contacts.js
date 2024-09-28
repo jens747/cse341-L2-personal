@@ -1,11 +1,14 @@
 const express = require("express");
 const routes = express.Router();
 
-const db = require("../connections");
+// const db = require("../db/connect");
 // const { getAllRecords, getRecordById } = require("../controllers/contacts");
 
-routes.get("/", db.getAllRecords);
+// handle route requests sent to API
+const routeContacts = require("../controllers/contacts");
 
-routes.get("/:id", db.getRecordById);
+routes.get("/", routeContacts.getAllRecords);
+
+routes.get("/:id", routeContacts.getRecordById);
 
 module.exports = routes;
