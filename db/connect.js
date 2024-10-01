@@ -1,3 +1,4 @@
+// Load environment variables from .env file
 const dotenv = require("dotenv");
 dotenv.config();
 // import MongoClient class from MongoDB Node driver

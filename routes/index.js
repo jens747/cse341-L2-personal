@@ -1,16 +1,12 @@
+// Create a new router object using the express framework
 const router = require("express").Router();
 
+/* The use() method mounts middleware or subrouters 
+   to handle routes. "/contacts" is the root path 
+   where the sub-router is mounted. 
+   "require('./contacts')" imports the contacts router 
+   module from contacts.js. */
 router.use("/contacts", require("./contacts"));
 
+// Exports router object to be used by the app elsewhere
 module.exports = router;
-
-
-// const routes = require("express").Router();
-// const names = require("../controllers/index");
-// const data = require("../connections");
-
-// routes.get("/ms", names.displayMichael);
-
-// routes.get("/ds", names.displayDwight);
-
-// module.exports = routes;

@@ -1,0 +1,11 @@
+// LOCALHOST 
+### GET http://localhost:3000/contacts 
+### GET http://localhost:3000/contacts/66f474de32ef53eef1d2d7f7 
+### GET http://localhost:3000/contacts/66f474f732ef53eef1d2d7f9 
+### GET http://localhost:3000/contacts/66f4757832ef53eef1d2d7fb
+
+// PRODUCTION Deploy 
+### GET https://cse341-l2-personal.onrender.com/contacts 
+### GET https://cse341-l2-personal.onrender.com/contacts/66f474de32ef53eef1d2d7f7 
+### GET https://cse341-l2-personal.onrender.com/contacts/66f474f732ef53eef1d2d7f9 
+### GET https://cse341-l2-personal.onrender.com/contacts/66f4757832ef53eef1d2d7fb
