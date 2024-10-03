@@ -1,5 +1,7 @@
 const express = require("express");
 
+const path = require("path");
+
 // allow external domains to access server
 const cors = require("cors");
 
@@ -16,6 +18,12 @@ const app = express();
 const port = process.env.PORT || 3000;
 // const envar = require('dotenv').config();
 
+/* Middleware that allows express to read 
+   form data and access it at req.body */
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, "src")));
+
 // json request are accessible at req.body
 app.use(express.json());
 
@@ -23,7 +31,7 @@ app.use(express.json());
 app.use(cors());
 
 // Response for the site home page
-app.use("/", require("./routes"));                               
+app.use("/", require("./routes"));                          
 
 
 mongodb.initDb((err, mongodb) => {

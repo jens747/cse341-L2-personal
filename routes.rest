@@ -1,11 +1,70 @@
 // LOCALHOST 
-### GET http://localhost:3000/contacts 
-### GET http://localhost:3000/contacts/66f474de32ef53eef1d2d7f7 
-### GET http://localhost:3000/contacts/66f474f732ef53eef1d2d7f9 
-### GET http://localhost:3000/contacts/66f4757832ef53eef1d2d7fb
+### Get all contacts 
+GET http://localhost:3000/contacts 
+
+### Get contacts by id 
+GET http://localhost:3000/contacts/66f474de32ef53eef1d2d7f7 
+
+### 
+GET http://localhost:3000/contacts/66f474f732ef53eef1d2d7f9 
+
+### 
+GET http://localhost:3000/contacts/66f4757832ef53eef1d2d7fb
+
+### Create contact 
+POST http://localhost:3000/contacts/add HTTP/1.1
+content-type: application/json 
+
+{
+  "firstName":"Karen",
+  "lastName":"Filippelli",
+  "email":"kfilippelli@dundermifflinpaper.biz",
+  "favoriteColor":"blue",
+  "birthday":"1979-02-25"
+}
+
+### Update contact 
+PUT http://localhost:3000/contacts/put/66fdd69bf3b0affe7e09fe13 HTTP/1.1
+content-type: application/json
+
+{
+  "firstName":"Holly", 
+  "lastName":"Scott",
+  "email":"hscott@dundermifflinpaper.biz", "favoriteColor":"blue",
+  "birthday":"1972-03-03"
+}
+
+### Delete contact 
+DELETE http://localhost:3000/contacts/delete/66fdd69bf3b0affe7e09fe13 HTTP/1.1
 
 // PRODUCTION Deploy 
 ### GET https://cse341-l2-personal.onrender.com/contacts 
 ### GET https://cse341-l2-personal.onrender.com/contacts/66f474de32ef53eef1d2d7f7 
 ### GET https://cse341-l2-personal.onrender.com/contacts/66f474f732ef53eef1d2d7f9 
 ### GET https://cse341-l2-personal.onrender.com/contacts/66f4757832ef53eef1d2d7fb
+
+### Create contact 
+POST https://cse341-l2-personal.onrender.com/contacts/add HTTP/1.1
+content-type: application/json 
+
+{
+  "firstName":"Karen",
+  "lastName":"Filippelli",
+  "email":"kfilippelli@dundermifflinpaper.biz",
+  "favoriteColor":"blue",
+  "birthday":"1979-02-25"
+}
+
+### Update contact 
+PUT https://cse341-l2-personal.onrender.com/contacts/put/66fdd69bf3b0affe7e09fe13 HTTP/1.1
+content-type: application/json
+
+{
+  "firstName":"Holly", 
+  "lastName":"Scott",
+  "email":"hscott@dundermifflinpaper.biz", "favoriteColor":"blue",
+  "birthday":"1972-03-03"
+}
+
+### Delete contact 
+DELETE https://cse341-l2-personal.onrender.com/contacts/delete/66fdd69bf3b0affe7e09fe13 HTTP/1.1

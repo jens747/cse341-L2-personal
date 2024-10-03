@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Office Staff</title>
+</head>
+<body>
+  <h1>Checkout the Office Staff</h1>
+  <form action="/contacts/add" method="POST">
+    <label for="firstName">First Name: </label>
+    <input type="text" placeholder="first name" name="firstName" />
+    <label for="lastName">Last Name: </label>
+    <input type="text" placeholder="last name" name="lastName" />
+    <label for="email">Email: </label>
+    <input type="email" placeholder="email" name="email" id="email">
+    <label for="favoriteColor">Favorite color: </label>
+    <select name="favoriteColor" id="favoriteColor">
+      <option value="blue">blue</option>
+      <option value="green">green</option>
+      <option value="red">red</option>
+      <option value="pink">pink</option>
+      <option value="violet">violet</option>
+      <option value="orange">orange</option>
+      <option value="yellow">yellow</option>
+      <option value="black">black</option>
+      <option value="white">white</option>
+      <option value="gray">gray</option>
+      <option value="brown">brown</option>
+      <option value="copper">copper</option>
+      <option value="silver">silver</option>
+      <option value="gold">gold</option>
+    </select>
+    <label for="birthday">Birthday: </label>
+    <input type="date" placeholder="birthday" name="birthday" id="birthday">
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
