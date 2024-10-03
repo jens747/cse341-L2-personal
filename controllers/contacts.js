@@ -59,5 +59,95 @@ const getRecordById = async (req, res, next) => {
   }
 };
 
+const postRecord = async (req, res, next) => {
+  // Access the form data stored in req.body
+  const formData = req.body;
+  console.log(formData);
+
+  try {
+    // get the MongoDB database instance
+    const db = mongodb.getDb();
+    // Add the data from the form into "Contacts" collection
+    const result = await db.collection("Contacts").insertOne(formData);
+      
+    // Return the id of the Contacts collection record
+    console.log('Document inserted with _id: ', result.insertedId);
+
+    // Indicates that the response will be in JSON
+    res.setHeader("Content-Type", "application/json");
+    /* Sends successful HTTP status code (200), selects 
+       the first document in the array */
+    res.status(201).json({ message: "Record added successfully, id: ", id: result.insertId});
+  } catch (err) {
+    // Sends HTTP 500 (Internal Server Error), if error 
+    res.status(500).json({err: "Failed to add record.", err});
+  }
+}
+
+const putRecord = async (req, res, next) => {
+  try {
+    /* Get reference to the connectd MongoDB database 
+      instance so it can be queried */
+    const db = mongodb.getDb();
+    // Convert id from URL into a MongoDB ObjectId
+    const userId = req.params.id;
+
+    const contact = {
+      firstName: req.body.firstName, 
+      lastName: req.body.lastName, 
+      email: req.body.email, 
+      favoriteColor: req.body.favoriteColor, 
+      birthday: req.body.birthday
+    }
+    
+    // Access the Contacts collection within the database
+    const result = await db
+      .collection("Contacts")
+      .replaceOne({ _id: userId }, contact);
+    // Query Contacts for a record with a matching id
+    const id = await result.find({ _id: userId });
+    
+    if (result.modifiedCount > 0) {
+      res.status(204).json({ message: "Record updated successfully: ", id: result.insertId });;
+    } else {
+      // Sends HTTP 500 (Internal Server Error), if error 
+      res.status(500).json({err: "An error occurred while updating record."});
+    }
+  } catch (err) {
+    // Sends HTTP 500 (Internal Server Error), if error 
+    res.status(500).json({err: "Internal Server Error."});
+  }
+}
+
+const deleteRecord = async (req, res, next) => {
+  try {
+    /* Get reference to the connectd MongoDB database 
+       instance so it can be queried */
+    const db = mongodb.getDb();
+    // Convert the id from the URL into a Mongo ObjectId
+    const id = req.params.id;
+
+    // Run a check to see if the ID is valid
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid ID" });
+    }
+
+    // Access the Contacts collection within the database
+    const result = await db
+      .collection("Contacts")
+      .deleteOne({ _id: new ObjectId(id) });
+
+    if (result.deletedCount === 1) {
+      // Success response
+      res.status(200).json({ message: "Record deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Record not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting record:", error);
+    res.status(500).json({ message: "Failed to delete record", error });
+  }
+};
+
 // Exports both functions to be used in other parts of app
-module.exports = { getAllRecords, getRecordById };
+module.exports = { getAllRecords, getRecordById, postRecord, putRecord, deleteRecord };

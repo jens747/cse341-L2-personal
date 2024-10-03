@@ -17,5 +17,11 @@ routes.get("/", routeContacts.getAllRecords);
    as part of the request. */
 routes.get("/:id", routeContacts.getRecordById);
 
+routes.post("/add", routeContacts.postRecord);
+
+routes.put("/put/:id", routeContacts.putRecord);
+
+routes.delete("/delete/:id", routeContacts.deleteRecord);
+
 // Export the routes object to be used by the app elsewhere
 module.exports = routes;

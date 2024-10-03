@@ -8,5 +8,11 @@ const router = require("express").Router();
    module from contacts.js. */
 router.use("/contacts", require("./contacts"));
 
+router.use("/add", require("./contacts"));
+
+router.use("/delete", require("./contacts"));
+
+router.use("/put", require("./contacts"));
+
 // Exports router object to be used by the app elsewhere
 module.exports = router;
