@@ -62,7 +62,6 @@ const getRecordById = async (req, res, next) => {
 const postRecord = async (req, res, next) => {
   // Access the form data stored in req.body
   const formData = req.body;
-  console.log(formData);
 
   try {
     // get the MongoDB database instance
@@ -77,7 +76,7 @@ const postRecord = async (req, res, next) => {
     res.setHeader("Content-Type", "application/json");
     /* Sends successful HTTP status code (200), selects 
        the first document in the array */
-    res.status(201).json({ message: "Record added successfully, id: ", id: result.insertId});
+    res.status(201).json(result);
   } catch (err) {
     // Sends HTTP 500 (Internal Server Error), if error 
     res.status(500).json({err: "Failed to add record.", err});
@@ -89,9 +88,10 @@ const putRecord = async (req, res, next) => {
     /* Get reference to the connectd MongoDB database 
       instance so it can be queried */
     const db = mongodb.getDb();
-    // Convert id from URL into a MongoDB ObjectId
-    const userId = req.params.id;
+    // Convert id from string into a MongoDB ObjectId
+    const userId = new ObjectId(req.params.id);
 
+    // contact object values are updated by req.body
     const contact = {
       firstName: req.body.firstName, 
       lastName: req.body.lastName, 
@@ -103,10 +103,11 @@ const putRecord = async (req, res, next) => {
     // Access the Contacts collection within the database
     const result = await db
       .collection("Contacts")
+      /* Replace data in selected _id with data in contacts 
+         object, returns result.modifiedCount status */
       .replaceOne({ _id: userId }, contact);
-    // Query Contacts for a record with a matching id
-    const id = await result.find({ _id: userId });
     
+    // modifiedCount checks to see if document was modified
     if (result.modifiedCount > 0) {
       res.status(204).json({ message: "Record updated successfully: ", id: result.insertId });;
     } else {
@@ -137,9 +138,9 @@ const deleteRecord = async (req, res, next) => {
       .collection("Contacts")
       .deleteOne({ _id: new ObjectId(id) });
 
-    if (result.deletedCount === 1) {
+    if (result.deletedCount > 0) {
       // Success response
-      res.status(200).json({ message: "Record deleted successfully" });
+      res.status(204).json({ message: "Record deleted successfully" });
     } else {
       res.status(404).json({ message: "Record not found" });
     }
