@@ -61,7 +61,16 @@ const getRecordById = async (req, res, next) => {
 
 const postRecord = async (req, res, next) => {
   // Access the form data stored in req.body
-  const formData = req.body;
+  // const formData = req.body;
+
+  // contact object values are updated by req.body
+  const formData = {
+    firstName: req.body.firstName, 
+    lastName: req.body.lastName, 
+    email: req.body.email, 
+    favoriteColor: req.body.favoriteColor, 
+    birthday: req.body.birthday
+  }
 
   try {
     // get the MongoDB database instance
